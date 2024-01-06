@@ -17,7 +17,7 @@ export interface AppState {
 }
 
 export const initialState: AppState = {
-  isFetching: true,
+  isFetching: false,
   error: null,
 };
 

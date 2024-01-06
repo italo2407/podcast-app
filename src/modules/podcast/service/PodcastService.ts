@@ -1,15 +1,14 @@
-import { ResponseError } from "../../../shared/utils/response-error";
+import { ResponseError } from "src/shared/utils/response-error";
 import { Podcast } from "../domain/podcast";
-import { BaseService } from "./BaseService";
+import { mapperPodcast } from "../mapper/podcast.mapper";
 
-export class PodcastService extends BaseService {
+export class PodcastService {
   constructor() {
-    super();
   }
 
   async getTop100(): Promise<Podcast[]> {
     const response = await fetch(
-      `${this.baseUrl}/us/rss/toppodcasts/limit=100/genre=1310/json`,
+      `${'https://itunes.apple.com'}/us/rss/toppodcasts/limit=100/genre=1310/json`,
       {
         method: "GET",
       }
@@ -18,11 +17,8 @@ export class PodcastService extends BaseService {
     const result = await response.json();
 
     if (response.ok) {
-      console.log("Result Podcast");
-      console.log(result);
+			return mapperPodcast(result.feed.entry);
     }
-
-    this.logError(result);
     throw new ResponseError(
       "Failed to fetch getTop100 from PodcastService",
       response

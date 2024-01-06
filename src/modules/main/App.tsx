@@ -21,7 +21,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CustomToolbar />
-      <Box sx={{ paddingInline: 8 }}>
+      <Box sx={{ paddingX: 8, paddingY: 4 }}>
         <AppRoutes /> 
       </Box>
     </ThemeProvider>

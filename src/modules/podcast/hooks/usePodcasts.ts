@@ -13,19 +13,24 @@ export interface UsePodcasts {
   setPodcastFilter: Dispatch<SetStateAction<string | null>>;
 }
 
-export const usePodcasts = (): UsePodcasts => {
+export const usePodcasts = (podcastId?: string): UsePodcasts => {
   const [podcastFilter, setPodcastFilter] = useState<string | null>(null);
   const podcastService = new PodcastService();
-  const filterPodcastBYAuthorOrName = useCallback(
+  const filterPodcastByAuthorOrName = useCallback(
     (items: Podcast[]) => {
-      if (!podcastFilter) return items;
+      if (!podcastFilter && !podcastId) return items;
+
+			if(podcastId) {
+				return items.filter(item => item.id === podcastId)
+			}
+
       return items.filter(
         (item) =>
-          item.author.toLowerCase().includes(podcastFilter.toLowerCase()) ||
-          item.name.toLowerCase().includes(podcastFilter.toLowerCase())
+          item.author.toLowerCase().includes(podcastFilter!.toLowerCase()) ||
+          item.name.toLowerCase().includes(podcastFilter!.toLowerCase())
       );
     },
-    [podcastFilter]
+    [podcastFilter, podcastId]
   );
 
   const {
@@ -36,7 +41,7 @@ export const usePodcasts = (): UsePodcasts => {
   } = useQuery({
     queryKey: [QueryKeys.PODCASTS],
     queryFn: podcastService.getTop100,
-    select: filterPodcastBYAuthorOrName,
+    select: filterPodcastByAuthorOrName,
   });
 
   return {

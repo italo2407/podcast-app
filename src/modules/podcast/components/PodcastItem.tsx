@@ -13,7 +13,7 @@ interface PodcastItemProps {
 
 export function PodcastItem({ image, title, author }: PodcastItemProps) {
   return (
-    <Box sx={{ position: "relative", flex: 1}}>
+    <Box sx={{ position: "relative", flex: 1 }}>
       <Avatar
         alt="Remy Sharp"
         src={image}
@@ -25,7 +25,7 @@ export function PodcastItem({ image, title, author }: PodcastItemProps) {
           left: "20%",
         }}
       />
-      <Card sx={{ width: 250 }}> 
+      <Card sx={{ width: 250 }}>
         <CardActionArea>
           <CardContent sx={{ marginTop: 7 }}>
             <Typography

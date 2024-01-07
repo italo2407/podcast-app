@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { usePodcasts } from "../hooks/usePodcasts";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
@@ -44,12 +45,14 @@ export function Home() {
         sx={{ marginTop: 1 }}
       >
         {podcasts.map((item) => (
-          <Grid item xs={2}>
-            <PodcastItem
-              image={item.imgUrl}
-              title={item.name}
-              author={item.author}
-            ></PodcastItem>
+          <Grid key={item.id} item xs={2}>
+            <Link to={`/podcast/${item.id}`} style={{ textDecoration: "none" }}>
+              <PodcastItem
+                image={item.imgUrl}
+                title={item.name}
+                author={item.author}
+              ></PodcastItem>
+            </Link>
           </Grid>
         ))}
       </Grid>

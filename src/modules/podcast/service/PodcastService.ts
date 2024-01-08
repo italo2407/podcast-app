@@ -37,7 +37,7 @@ export class PodcastService {
     const result = await response.json();
 
     if (response.ok) {
-      return result.results;
+      return result.results.slice(1, result.results.length);
     }
     throw new ResponseError(
       "Failed to fetch getTop100 from PodcastService",

@@ -1,13 +1,17 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import App from "./App";
 import { GlobalAppProvider } from "./store/context";
 
-test("simple render", () => {
-  render(
+test("load app", async () => {
+  await render(
     <GlobalAppProvider>
-      <App></App>
+      <MemoryRouter>
+        <App></App>
+      </MemoryRouter>
     </GlobalAppProvider>
   );
 
-  expect(screen.getByText("Podcaster")).toBeInTheDocument();
+  const title = screen.getByText("Podcaster");
+  expect(title).toBeInTheDocument();
 });

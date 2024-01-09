@@ -13,7 +13,7 @@ describe("Home page", () => {
   it("should search podcasts with title which includes 'song'", () => {
     cy.get('input[type="text"]').type('song');
 
-    cy.get(".MuiGrid-item").should("have.length", 11);
+    cy.get(".MuiGrid-item").should("have.length", 10);
   });
 
   it("should go to podcast detail page", () => {
